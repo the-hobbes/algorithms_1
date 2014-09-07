@@ -1,0 +1,12 @@
+When you are trying to find the root of the tree containing a given node, we are touching all the nodes on the path from the node to the root. So while we are doing that, we may as well make all the nodes we touch when we walk up the tree to the root actually point to the root itself. This will be a constant extra cost. 
+
+This follows from our understanding of optimization in weighted_quick_find, whereby decreasing the depth of any given tree (done by constraining unions to add smaller trees to larger trees) yields a performance increase and running time of log2 of N. Decreasing the depth of the trees by performing path compression (linking nodes directly to the root) is a progression of this optimization.
+
+A one line of code in _root() will accomplish this, and keep the tree almost completely flat:
+	self.id[i] = self.id[self.id[i]]
+
+In the real world, the weighted quick union with path compression runs very close to linear time.
+1 billion operations on 1 billion objects will take 6 seconds.
+-the algorthm design is what enables the quick solution, not the computer speed.
+
+Also, remember that there is a difference between union-by-size(# nodes) and union-by-height(depth)

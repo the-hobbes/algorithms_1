@@ -6,12 +6,13 @@ class QuickFind():
     self.id = [i for i in range(n)]
 
   def connected(self, p, q):
-    '''determine if p and n are connected.'''
+    '''determine if p and n are connected. This is the find in quickfind'''
     return self.id[p] == self.id[q]
 
   def union(self, p, q):
     '''connect two elements p and q.
         set all items with id[p] to have id[q]
+        This will run in N^2 time, which is too slow (quadratic time).
     '''
     p_id = self.id[p]
     q_id = self.id[q]

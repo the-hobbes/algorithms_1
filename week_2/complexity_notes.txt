@@ -1,0 +1,88 @@
+Asymptotic behavior:
+  - the number of actual CPU instructions needed for each statement in any given programming language depends on the compiler and the CPU instruction set. 
+  - we can get rid of all of these details and analyze a program more generally.  This means we can drop all other constants and only worry about the largest growing term, eg the n^2 in n^2 + 4x + 5
+  - we only care about what happens as the input grows large. 
+ 
+Complexity:
+  - any program (that doesn't use recursion) without loops will have f(n) = 1 constant time, since the number of instructions it needs is just a constant
+  - any program with a single loop which goes from 1 to n will have f(n) = n, since it will do a constant number of instructions before and after the loop, while it does a constant number of instructions WITHIN the loop n times. 
+  - Rule of thumb: 
+    * simple programs can be analyzed by counting the nested loops of the program. A single loop over n  items yields f(n) = n (constant time). A loop within a loop yields f(n) = n^2 (exponential time). A loop w/in a loop w/in a loop yields f(n) =  n^3
+
+  - Rule of thumb:
+    * Given a series of for loops that are sequential, the slowest of them determines the asymptotic behavior of the program. Two nested loops followed by a single loop is asymptotically the same as the nested loops alone, because the nested loops DOMINATE the simple loop.
+
+Theta of N θ(n):
+  - when you've figured out the exact asymptotic behavior of a function, you can call its time complexity Theta of that running time.
+  - So an algorithm with θ(n) is complexity of n.
+  - θ is the symbol for theta (c+k, then h* in vim). 
+  - examples of this are:
+    n^6 + 3n == θ(n^6)
+    2^n + 12 == θ(2^n)
+    n^n + n  == θ(n^n)
+  - Rule of thumb:
+    * programs with a larger θ run slower than programs with a smaller θ
+
+Big O notation:
+  - it is often difficult (especially in complex cases) to determine the exact time complexity of an algorithms
+  - in these cases, it is still possible to determine an upper bound that the algorthim will never exceed. 
+  - you can figure out an upper bound by taking the algorithm you are analyzing and figuring out a way to make it worse (make it take longer to solve a problem than it already does).
+  - if you can find such a worse program and measure its time complexity, than you know that the original program is at most that bad (and maybe better). 
+  - for example, let us consider an algorithm with two nested loops, one from 0 to n, and one from 0 to 5. If we instead say that the loop from 0 to 5 goes from 0 to n, we can see that we've created a new algorithm with time complexity θ(n^2), because we have two nested loops that repeat exactly n times. 
+  - we can then say that the original algorithm is O(n^2), big oh of n squared. 
+  - what O(n^2) says is that the algorithm is asymptotically no worse than n^2, although it maybe better or the same as n^2. 
+  - btw, if a program is θ(n^2), we can also say that it is O(n^2). You can see that this is the case by imaginine that you alter the original algorithm in such a way that doesn't change it much, but makes it a little worse (like adding an extra instruction at the beginning of the program). Doing this will alter the instruction-counting function by a simple constant, which is ignored when it comes to asymptotic behaviour. 
+  - so, a program that is θ(n^2) may be O(n^2), but a program that is O(n^2) may not be θ(n^2). 
+
+Quick recap: 
+  - O-complexity gives an upper bound for actual complexity of an algorithm.
+    * tells us that our program will never be slower than a specific bound.
+  - θ-complexity gives the actual complexty of an algorithm (a tight bound).
+
+Tight vs Non-tight bounds:
+  - complexity bounds that are not tight are denoted by a lowercase 'o'
+  - if an algorithm is θ(n), then its tight complexity is n
+  - this algorithm is also both O(n) and O(n^2) 
+  - since the algorithm is θ(n), the O(n) bound is a tight one
+  - however, the O(n^2) bound is not tight.
+  - therefore, we can say that θ(n) is o(n^2)
+  - it is better if we can find tight bounds for algorithms as they give us more information, but this isn't always easy to do
+
+Rule of thumb:
+  * it is easier to figure out the O-complexity of an algorithm than its θ-complexity.
+
+Omega of N, Ω(n)
+  - vim tip to write omega: c+k, W*
+  - do the opposite of O notation, and modify an algorithm to make its running complexity better is denoted by the Ω character
+  - this is useful if we want to prove an algorithm is slow or bad. 
+  - for example, saying that an algorithm is Ω(n^3) means that the algorithm ISN'T better than n^3. 
+  - it may be θ(n^3) exactly, as bad as O(n^4), or even worse, but we knot its at least somewhat bad
+  - so, Ω gives us a lower bound for the complexity of an algorithm. 
+  - similarly to the non-tight bound 'o', we can write ω to indicate a lower bound that isn't tight
+  - for example, a θ(n^3) algorithm is o(n^4), and ω(n^2) 
+
+Asymptotic comparison operator   Numeric comparison operator
+------------------------------   ---------------------------
+Our algorithm is o( something )  A number is < something
+Our algorithm is O( something )  A number is ≤ something
+Our algorithm is Θ( something )  A number is = something
+Our algorithm is Ω( something )  A number is ≥ something
+Our algorithm is ω( something )  A number is > something
+
+Rule of thumb: 
+  * O is the most commonly used notation, as its easier to determine than θ and more practically useful than Ω.
+
+Logarithms:
+  - A logarithm is an operation applied to a number that makes it quite a bit smaller, much like taking the square root of a number.
+  - logarithms are the inverse operation of exponentiating something
+  - consider 2^x = 1024
+  - to solve for x, we ask ourselves what the number would be to which we must raise the base (2) to get the answer 1024?
+  - the number is 10. 2^10 = 1024
+  - in this case, 10 is the logarithm of 1024, denoted as log(1024). 
+  - because we are using 2 as a base, these logarithms are called base 2 logarithms 
+  - there are other bases for logarithms, but in computer science base 2 is much more common than anything else.
+
+Recursive complexity: 
+  - a recursive function is one that calls itself
+  - even though a recursive function might not have any loops, its complexity isn't necessarily constant.
+  - the complexity of a recursive function is based on its input, as with other functions. For an input of n, a recursive function may execute n times, and have a run-time complexity of θ(n).

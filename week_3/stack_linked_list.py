@@ -7,7 +7,6 @@
 
   Complexity analysis:
   - constant time, as we can see that there are no loops or recursion
-  - we can do better than constant time, by using an array instead of a linked-
     list.
 '''
 

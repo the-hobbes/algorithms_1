@@ -5,6 +5,7 @@
 
   Complexity analysis:
   - a defect is that the stack overflows when N exceeds capacity. 
+  - the client shouldn't have to know how big the stack is
 '''
 
 class StackOfStrings():
@@ -14,7 +15,7 @@ class StackOfStrings():
   def __init__(self, capacity):
     # note that capacity is a cheat, to be fixed later
     self.stack = [None] * capacity
-    self.top = 0
+    self.top = 0 # top of the stack
 
   def push(self, item):
     # add new item at s[n]

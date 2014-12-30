@@ -1,0 +1,13 @@
+There are tradeoffs to be considered when deciding whether to use an array or linked list as your data structure.
+
+Linked-List:
+  - every operation takes constant time in the worst case
+  - you must use extra time and space to deal with the links between nodes
+
+Resizing-array:
+  - every operation takes ocnstant amortize time (so some may take more or less than constant time in practice)
+  - there is less wasted space
+
+If you want to be sure that every operation is fast, use a linked list.
+
+If you only care about the total amount of time an algorthim takes, use a resizing array because the individial operations are fast.

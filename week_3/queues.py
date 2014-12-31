@@ -9,7 +9,7 @@
 
 class QueueOfStringsLinkedList():
   '''
-    Queue =
+    Queue =   
       first - node - node - node - last
   '''
 
@@ -30,30 +30,53 @@ class QueueOfStringsLinkedList():
     self.last = QueueOfStringsLinkedList.Node()
     self.last.item = item
     self.last.nxt = None
-    old_last.nxt = self.last
-  
-    #TODO: add the special case for empty queue in both
-    # the enqueue and dequeue operations. 
-
+    
+    # handle empty queue
+    if self.is_empty():
+      self.first = self.last
+    else:
+      old_last.nxt = self.last  
+    
   def dequeue(self):
     # save item to return
     # delete first node
     # return saved item
-
+    
     item = self.first.item
     self.first = self.first.nxt
+
+    # handle empty queue
+    if self.is_empty():
+      self.last = QueueOfStringsLinkedList.Node()
+
     return item
   
   def is_empty(self):
-    return self.first.nxt == None
+    if self.first == None:
+      return True
+    elif self.first.item  == '':
+      return True
+    
+    return False
+  
+  def print_queue(self):
+    node = self.first
+    while(node.item):
+      print node.item
+      if node.nxt == None:
+        break
+      node = node.nxt
+
 
 def main():
   ll_queue = QueueOfStringsLinkedList() 
   ll_queue.enqueue('a')
   ll_queue.enqueue('b')
   ll_queue.enqueue('c')
-  ll_queue.dequeue()
-  ll_queue.dequeue()
-  assert ll_queue.dequeue() == 'c'
+  ll_queue.print_queue()
+  print '---Dequeue---'
+  print ll_queue.dequeue()
+
+
 main()
 

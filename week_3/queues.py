@@ -82,33 +82,52 @@ class QueueOfStringsResizingArray():
 
   def __init__(self):
     self.q = []
-    self.head = None
-    self.tail = None
-    self.capacity = None
+    self.head = 0
+    self.tail = 0
+    self.N = 0 # number of elements in the queue
 
   def enqueue(self, item):
     # add a new item at q[tail]
-    pass
+    if len(self.q) == self.N:
+      self.resize(len(self.q) * 2)
+    if len(self.q) == 0:
+      self.resize(2)
+
+    self.q[self.tail + 1] = item
+    self.tail += 1
+    if self.tail == len(self.q):
+      self.tail = 0
+    self.N += 1    
 
   def dequeue(self):
     # remove an item from q[head]
-    pass
+    item = self.q[self.head]
+    self.q[self.head] = None
+    self.N -= 1
+    self.head += 1
+    
+    if self.head == len(self.q):
+      self.head = 0
+
+    if len(self.q) != 0 and len(self.q)/4 == self.N:
+      self.resize(len(self.q)/2)
 
   def resize(self, capacity):
     new_array = [None] * capacity
-    for index in range(len(self.q)):
-      if self.q[index]:
-        new_array[index] = self.q[index]
-
-    return new_array
+    for i in range(0, self.N):
+      new_array[i] = self.q[self.first + i % len(self.q)]    
+    self.q = new_array
+    self.head = 0
+    self.tail = self.N
 
   def is_empty(self):
-    pass
+    return self.N == 0
 
   def print_queue(self):
-    pass
+    print self.q
 
-def main():
+
+def test_ll():
   print '---Linked List Queue:---'
   ll_queue = QueueOfStringsLinkedList() 
   ll_queue.enqueue('a')
@@ -118,10 +137,17 @@ def main():
   print '---Dequeue---'
   print ll_queue.dequeue()
 
+def test_array():
   print '---Array Queue---'
   array_queue = QueueOfStringsResizingArray()
   array_queue.enqueue('a')
   array_queue.print_queue()
+  print array_queue.dequeue()
+  # TODO: there is a bug in this: i fill it with none. also, the starting size should be handled more gracefully
+
+def main():
+  # test_ll()
+  test_array() 
 
 
 main()

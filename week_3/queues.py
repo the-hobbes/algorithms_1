@@ -93,7 +93,7 @@ class QueueOfStringsResizingArray():
     if len(self.q) == 0:
       self.resize(2)
 
-    self.q[self.tail + 1] = item
+    self.q[self.tail] = item
     self.tail += 1
     if self.tail == len(self.q):
       self.tail = 0
@@ -112,10 +112,12 @@ class QueueOfStringsResizingArray():
     if len(self.q) != 0 and len(self.q)/4 == self.N:
       self.resize(len(self.q)/2)
 
+    return item
+
   def resize(self, capacity):
     new_array = [None] * capacity
     for i in range(0, self.N):
-      new_array[i] = self.q[self.first + i % len(self.q)]    
+      new_array[i] = self.q[self.head + i % len(self.q)]    
     self.q = new_array
     self.head = 0
     self.tail = self.N
@@ -141,12 +143,14 @@ def test_array():
   print '---Array Queue---'
   array_queue = QueueOfStringsResizingArray()
   array_queue.enqueue('a')
+  array_queue.enqueue('b')
+  array_queue.enqueue('c')
   array_queue.print_queue()
+  print '---Dequeue---'
   print array_queue.dequeue()
-  # TODO: there is a bug in this: i fill it with none. also, the starting size should be handled more gracefully
 
 def main():
-  # test_ll()
+  test_ll()
   test_array() 
 
 

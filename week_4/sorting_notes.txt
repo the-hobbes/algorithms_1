@@ -1,0 +1,31 @@
+Sorting:
+  - rearrange a set of N items into some order according to a key.
+  - the key is some part of the item
+  - we want to be able to sort any type of data
+    - strings, date objects, numbers, etc...
+
+callbacks
+  - how can sort() know how to compare data of different types without any
+  information about the type of an items key?
+  - passing functions as arguments to other functions (in this case, each object 
+  implements a compareTo() method.
+  - in java, this means making your class an implementation of the comparible
+  interface, and overriding the compareTo() method.
+
+It will look something like this:
+- Client: Insertion.sort(files)
+- Interface: public interface Comparible<Item>... public int compareTo(item)
+- object implementation: public class File implements Comparable<file>...
+- sort implementation: a[j].compareTo(a[j-1[) < 0
+
+This is to make the sort work on any type of object, as long as it implements
+the compareTo() method.
+
+Selection Sort
+  - start with an array of unsorted objects
+  - begin with a pointer at the 0th position of the array
+  - scan the array for the smallest element
+  - swap that element with the element at the pointer
+  - repeat until the array is sorted
+
+

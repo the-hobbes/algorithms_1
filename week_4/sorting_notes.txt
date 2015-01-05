@@ -27,5 +27,29 @@ Selection Sort
   - scan the array for the smallest element
   - swap that element with the element at the pointer
   - repeat until the array is sorted
+  - complexity:
+    * N^2/2 compares and N exchanges
+    * import order doesn't matter, it will still use O(n^2) time
+    * can't sort moving data as there are a linear number of exchanges regardless
+      of order
 
-
+Insertion sort
+  - begin with an unsorted array
+  - take the first element and call it J
+  - compare J to the element on its immediate left, called I
+  - if J > I, swap the two
+    - perform the comparison and swap again if necessary
+  - once J < I, move the pointer to the next unsorted element
+  - elements to the left of the pointer are sorted
+  - elements to the right of the pointer have not been examined yet
+  - complexity:
+    * about twice as fast as selection sort
+    * if the array is already sorted, then no exchanges occurs, only comparisions
+      (n - 1 comparisions). This is much faster than selection sort.
+    * if the array is in descending order insertion sort is slower than selection
+      sort (same number of compares but many more exchanges). 
+    * useful when the array is partially sorted, for example in the case of
+      inversions (when any two keys are out of order in an array). 
+    * an array is partially sorted when its number of inversions are linear
+    * insertion sort is O(n) for partially sorted arrays, which is quite useful!
+    

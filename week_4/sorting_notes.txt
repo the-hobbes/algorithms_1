@@ -53,3 +53,5 @@ Insertion sort
     * an array is partially sorted when its number of inversions are linear
     * insertion sort is O(n) for partially sorted arrays, which is quite useful!
     
+Shellsort
+  -

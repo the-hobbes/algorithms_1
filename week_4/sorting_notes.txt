@@ -54,4 +54,48 @@ Insertion sort
     * insertion sort is O(n) for partially sorted arrays, which is quite useful!
     
 Shellsort
-  -
+  Useful in practice:
+  - fast unless array size is huge
+  - very tiny code footprint
+  - simple algorithm
+  - interesting questions (best case sequence of increments? average case
+    performance? asymptotic growth rate? all unknown).
+
+  - insertion sort is inefficient because entries only move one position at a
+    time, even though we may know that they have much further to go. 
+  - shell sort tries to overcome this by 'h-sorting' the given arrays
+  - an h-sorted array is h interleaved sorted subsequences (start at position
+    0 and look at every h-th element
+  - an array is h-sorted for decreasing sequences of values of h
+  - each sort can be implemented with a few exchanges, given that the previous
+    sorts were done
+  - it is insertion sort, but instead of looking back 1, we look back h positions. 
+    Code is the same, but when we go back through the array we skip by h instead
+    of just 1. 
+
+  Example, with increments 7, 3, and 1:
+    S O R T E X A M P L E
+  7 Sort:
+    first pass, compare m and s. Swap occurs
+      M O R T E X A S P L E
+    second pass, compare o and p. no swap occurs.
+    third pass, compare r and l. swap occurs.
+      M O L T E X A S P R E
+    fourth pass, compare t and e. swap occurs.
+      M O L E E X A S P R T
+    3 Sort:
+      first pass, compare e and m. swap occurs
+        E O L M E X A S P R T
+      second pass, compare o and e. swap occurs.
+        E E L M O X A S P R T
+      ...
+      And so on. 
+      1 sort follows in the same manner, and is insertion sort. Note that since the
+      array is in a semi-sorted configuration, insertion sort runs quickly. 
+
+    - which increment sequence should be used? common ones are:
+      - powers of two (bad)
+      - powers of two - 1 (ok)
+      - 3x + 1 (not bad, easy to compute)
+      - etc... The best has not been discovered yet.
+

@@ -2,6 +2,16 @@
 
 class ShellSort():
   '''
+    Good visual demonstration of the algorithm:
+      https://www.youtube.com/watch?v=M9YCh-ZeC7Y
+
+    Algorithm Description:
+      - Choose a starting step size, using one of the known methods.
+      - step forward through the array until you hit array[stepsize]
+      - compare the value of array[stepsize] with array[startingpoint]
+        - for example, if the step size was 6 and this was the first iteration
+          of the array, you would compare array[6] and array[0]
+      - if array[6] is smaller than array[0], swap them
   '''
   def __init__(self, a):
     # argument: comparable a

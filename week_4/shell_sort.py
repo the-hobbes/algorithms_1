@@ -12,6 +12,16 @@ class ShellSort():
         - for example, if the step size was 6 and this was the first iteration
           of the array, you would compare array[6] and array[0]
       - if array[6] is smaller than array[0], swap them
+      - if you can walk back the length of the step size from the newly swapped
+        element to compare it to the element in its position - step size, do so.
+        - if the element you are comparing it to is larger than it, then swap
+          them 
+        - repeat
+      - otherwise, continue forward until you cannot walk forward a full step
+        size
+      - repeat the above for a smaller step size, decremented according to the
+        method you choose fit. Do this until the step size is 1, after which
+        the array will be sorted.
   '''
   def __init__(self, a):
     # argument: comparable a

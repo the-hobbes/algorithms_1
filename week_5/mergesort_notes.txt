@@ -1,0 +1,20 @@
+Mergesort is a very widely known, respected, and understood sorting algorithm.
+
+Mergesort uses a bit more memory, due to the use of an auxiliary array for coping into. 
+  - in-place mergesort algorithm has yet to be discovered.
+
+Basic plan for mergesort:
+  - divide the array into two halves
+  - recursively sort each half
+  - merge the two halves
+
+The merge operation:
+  - given two sorted sub arrays, a[lo] to a[mid] and a[mid + 1] to a[hi], replace them with the sorted subarray a[lo] to a[hi]
+  1) copy everything to an auxiliary array
+    - we will copy items back to the original array in sorted order
+  2) maintain three pointers: i, the start of a[lo], j, the start of a[mid + 1], and k, the start of the original array, where we will copy things back to
+  3) compare the items at i and j, then take the smaller of the two and copy it into the original array at position k.
+  4) increment whichever pointer was chosen
+  * note: if two pointers contain objects of equal value, just choose the first one and increment its pointer
+  5) 
+

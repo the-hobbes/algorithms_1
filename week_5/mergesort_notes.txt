@@ -14,7 +14,7 @@ The merge operation:
     - we will copy items back to the original array in sorted order
   2) maintain three pointers: i, the start of a[lo], j, the start of a[mid + 1], and k, the start of the original array, where we will copy things back to
   3) compare the items at i and j, then take the smaller of the two and copy it into the original array at position k.
-  4) increment whichever pointer was chosen
+  4) increment whichever pointer was chosen, as well as the pointer to k.
   * note: if two pointers contain objects of equal value, just choose the first one and increment its pointer
-  5) 
+  5) repeat this until there are no more elements in the two secondary arrays
 

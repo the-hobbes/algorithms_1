@@ -6,18 +6,23 @@
 import math
 
 class Mergesort():
-  
+
 
   def sort(self, comparable):
     '''
       Recursively sort an array.
     '''
     if len(comparable) < 2:
-      return comparable  
+      return comparable
     result = [0] * len(comparable)
-    mid = int(math.floor(len(comparable) / 2))
-    low_array = self.sort(comparable[:mid])
-    high_array = self.sort(comparable[mid:])
+    mid = len(comparable) // 2
+    low_array = comparable[:mid]
+    high_array = comparable[mid:]
+
+    self.sort(low_array)
+    self.sort(high_array)
+
+    http://interactivepython.org/runestone/static/pythonds/SortSearch/TheMergeSort.html
 
     # actually do the sort
     i = 0
@@ -26,8 +31,13 @@ class Mergesort():
       print 'i is: ' + str(i)
       print 'j is: ' + str(j)
       print 'length of low_array is: ' + str(len(low_array))
+      print 'the low_array: '
+      print low_array
       print 'length of high_array is: ' + str(len(high_array))
-  
+      print 'the high_array: '
+      print high_array
+      print '\n'
+
       if i > len(low_array):
         result[k] = high_array[j]
         j += 1
@@ -42,12 +52,13 @@ class Mergesort():
         j += 1
 
     return result
-        
+
 
 def main():
   comparable = [2, 4, 5, 1, 0, 435, 5, 7, 9]
   ms = Mergesort()
   print ms.sort(comparable)
-  
+
 
 main()
+

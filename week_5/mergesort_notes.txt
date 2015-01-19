@@ -18,3 +18,12 @@ The merge operation:
   * note: if two pointers contain objects of equal value, just choose the first one and increment its pointer
   5) repeat this until there are no more elements in the two secondary arrays
 
+Bottom-up mergesort
+  - no recursion
+  - log n passes, total cost n log n
+  - treats the array to be sorted as a set of individually sorted elements
+  - goes through the array, merging increasing subarrays of elements until a 
+    sorted list is produced
+  - for example, the first pass would merge each pair of elements
+  - the second pass would merge 4 elements, and so on until the whole array is
+    merged.

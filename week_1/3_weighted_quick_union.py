@@ -1,10 +1,12 @@
+#!/usr/bin/env python
+
 '''
 	You can use a weighted algorithm to make sure smaller trees become the 
 	children of larger trees. This is done by keeping track of the sizes of
 	trees and comparing them, and linking the root of the smaller tree to the 
 	root of the larger tree in each union operation.
 
-	You would use a weighted algorithm to keep the trees from getting too tall,
+	You could use a weighted algorithm to keep the trees from getting too tall,
 	and thus making the find operation too expensive.
 
 	Analysis:
@@ -20,6 +22,10 @@
 		if you start with 1 and double logN times you get N, and there are only
 		N nodes in the tree. 
 '''
+import sys
+TESTING = False
+
+
 class QuickUnion():
 	def __init__(self, n):
 		'''Create the array and set the value of each element to be its own root
@@ -60,12 +66,31 @@ class QuickUnion():
 			self.id[q_root] = p_root
 			self.sz[p_root] += self.sz[q_root]
 
+
+def process_input(qf):
+  '''
+      Process input from std out, performing unions on the elements
+      To call this with input, run something like:
+      echo "7-5 5-1 6-9 6-8 5-3 0-7" | ./3_weighted_quick_union.py
+  '''
+
+  for line in sys.stdin:
+      ar = line.strip().split()
+      ar = [item.replace('-', ',') for item in ar]
+  
+  for group in ar:
+    p, q = int(group[0]), int(group[2])
+    qf.union(p, q)
+
+  return qf.id
+
 def main():
-  NUMBER_OF_ELEMENTS = 10
-  qu = QuickUnion(NUMBER_OF_ELEMENTS) # 505
-  qu.union(4, 3)
-  qu.union(3, 8) # 8 becomes child of 4, since it is smaller than tree 3,4 (and 4 is root)
-  print qu.id
-
-
+	NUMBER_OF_ELEMENTS = 10
+	qu = QuickUnion(NUMBER_OF_ELEMENTS)
+	if TESTING:
+		qu.union(4, 3)
+		qu.union(3, 8) # 8 becomes child of 4, since it is smaller than tree 3,4 (and 4 is root)
+		print qu.id
+	else:
+		print process_input(qu)
 main()

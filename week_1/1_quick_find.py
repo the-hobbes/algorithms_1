@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+
+import sys
+TESTING = False
+
+
 class QuickFind():
   '''implement the QuickFind algorithm, to see if any two items are connected'''
 
@@ -22,15 +28,32 @@ class QuickFind():
         self.id[idx] = q_id
 
 
+def process_input(qf):
+  '''
+      Process input from std out, performing unions on the elements
+      To call this with input, run something like:
+      echo "7-5 5-1 6-9 6-8 5-3 0-7" | ./1_quick_find.py
+  '''
+
+  for line in sys.stdin:
+      ar = line.strip().split()
+      ar = [item.replace('-', ',') for item in ar]
+  
+  for group in ar:
+    p, q = int(group[0]), int(group[2])
+    qf.union(p, q)
+
+  return qf.id
+
 def main():
   NUMBER_OF_ELEMENTS = 10
-
   qf = QuickFind(NUMBER_OF_ELEMENTS)
-  assert qf.id == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-  
-  qf.union(9, 1)
-  assert qf.id == [0, 1, 2, 3, 4, 5, 6, 7, 8, 1]
 
-  
+  if TESTING:
+    assert qf.id == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]   
+    qf.union(9, 1)
+    assert qf.id == [0, 1, 2, 3, 4, 5, 6, 7, 8, 1]
+  else:
+    print process_input(qf)
 
 main()

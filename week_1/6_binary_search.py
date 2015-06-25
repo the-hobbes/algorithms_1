@@ -1,3 +1,4 @@
+#!/usr/bin/python
 '''
 	Binary Search algorthim.
 	Searching for a key in a sorted array.

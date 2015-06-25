@@ -1,0 +1,101 @@
+Sorting:
+  - rearrange a set of N items into some order according to a key.
+  - the key is some part of the item
+  - we want to be able to sort any type of data
+    - strings, date objects, numbers, etc...
+
+callbacks
+  - how can sort() know how to compare data of different types without any
+  information about the type of an items key?
+  - passing functions as arguments to other functions (in this case, each object 
+  implements a compareTo() method.
+  - in java, this means making your class an implementation of the comparible
+  interface, and overriding the compareTo() method.
+
+It will look something like this:
+- Client: Insertion.sort(files)
+- Interface: public interface Comparible<Item>... public int compareTo(item)
+- object implementation: public class File implements Comparable<file>...
+- sort implementation: a[j].compareTo(a[j-1[) < 0
+
+This is to make the sort work on any type of object, as long as it implements
+the compareTo() method.
+
+Selection Sort
+  - start with an array of unsorted objects
+  - begin with a pointer at the 0th position of the array
+  - scan the array for the smallest element
+  - swap that element with the element at the pointer
+  - repeat until the array is sorted
+  - complexity:
+    * N^2/2 compares and N exchanges
+    * import order doesn't matter, it will still use O(n^2) time
+    * can't sort moving data as there are a linear number of exchanges regardless
+      of order
+
+Insertion sort
+  - begin with an unsorted array
+  - take the first element and call it J
+  - compare J to the element on its immediate left, called I
+  - if J > I, swap the two
+    - perform the comparison and swap again if necessary
+  - once J < I, move the pointer to the next unsorted element
+  - elements to the left of the pointer are sorted
+  - elements to the right of the pointer have not been examined yet
+  - complexity:
+    * about twice as fast as selection sort
+    * if the array is already sorted, then no exchanges occurs, only comparisions
+      (n - 1 comparisions). This is much faster than selection sort.
+    * if the array is in descending order insertion sort is slower than selection
+      sort (same number of compares but many more exchanges). 
+    * useful when the array is partially sorted, for example in the case of
+      inversions (when any two keys are out of order in an array). 
+    * an array is partially sorted when its number of inversions are linear
+    * insertion sort is O(n) for partially sorted arrays, which is quite useful!
+    
+Shellsort
+  Useful in practice:
+  - fast unless array size is huge
+  - very tiny code footprint
+  - simple algorithm
+  - interesting questions (best case sequence of increments? average case
+    performance? asymptotic growth rate? all unknown).
+
+  - insertion sort is inefficient because entries only move one position at a
+    time, even though we may know that they have much further to go. 
+  - shell sort tries to overcome this by 'h-sorting' the given arrays
+  - an h-sorted array is h interleaved sorted subsequences (start at position
+    0 and look at every h-th element
+  - an array is h-sorted for decreasing sequences of values of h
+  - each sort can be implemented with a few exchanges, given that the previous
+    sorts were done
+  - it is insertion sort, but instead of looking back 1, we look back h positions. 
+    Code is the same, but when we go back through the array we skip by h instead
+    of just 1. 
+
+  Example, with increments 7, 3, and 1:
+    S O R T E X A M P L E
+  7 Sort:
+    first pass, compare m and s. Swap occurs
+      M O R T E X A S P L E
+    second pass, compare o and p. no swap occurs.
+    third pass, compare r and l. swap occurs.
+      M O L T E X A S P R E
+    fourth pass, compare t and e. swap occurs.
+      M O L E E X A S P R T
+    3 Sort:
+      first pass, compare e and m. swap occurs
+        E O L M E X A S P R T
+      second pass, compare o and e. swap occurs.
+        E E L M O X A S P R T
+      ...
+      And so on. 
+      1 sort follows in the same manner, and is insertion sort. Note that since the
+      array is in a semi-sorted configuration, insertion sort runs quickly. 
+
+    - which increment sequence should be used? common ones are:
+      - powers of two (bad)
+      - powers of two - 1 (ok)
+      - 3x + 1 (not bad, easy to compute)
+      - etc... The best has not been discovered yet.
+

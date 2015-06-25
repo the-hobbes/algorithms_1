@@ -1,0 +1,8 @@
+Stacks and queues
+  - fundamental data types
+  - operations include insert, remove, iterate, test if empty
+  - stack-> examine the item most recently added (LIFO)
+    * push, pop  
+  - queue-> examine the item least recently added (FIFO)
+    * enqueue, dequeue
+

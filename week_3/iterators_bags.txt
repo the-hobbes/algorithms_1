@@ -1,0 +1,20 @@
+- An iterable is a class that has a method that returns an Iterator.
+- An iterator is a class that has methods hasNext() and next()
+
+This lets you do things like foreach statements. 
+- java: 
+    for (String s : stack)
+      StdOut.prinln(s)
+- python:
+    for str in stack:
+      print str
+
+the client is always using hasNext() (in both the python an java versions here) in order to determine if there is another string in the stack in our example. 
+
+Bag:
+- when you need a datastructure to store objects, but order doesn't matter
+- api looks like:
+    bag()
+    add(item)
+    size()
+    iterator() # iterator for all items in the bag.
